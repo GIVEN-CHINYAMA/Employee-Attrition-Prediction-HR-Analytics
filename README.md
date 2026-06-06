@@ -1,35 +1,29 @@
 # 👥 Employee Attrition Prediction — HR Analytics
 
-<p align="center">
-  <a href="https://colab.research.google.com/github/GIVEN-CHINYAMA/Employee-Attrition-Prediction/blob/main/Employee_Attrition_Prediction_HR_Analytics.ipynb">
-    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" height="28"/>
-  </a>
-  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python"/>
-  <img src="https://img.shields.io/badge/XGBoost-Gradient%20Boosting-FF6600?logo=xgboost" alt="XGBoost"/>
-  <img src="https://img.shields.io/badge/SHAP-Explainable%20AI-8A2BE2" alt="SHAP"/>
-  <img src="https://img.shields.io/badge/scikit--learn-ML-F7931E?logo=scikit-learn&logoColor=white" alt="scikit-learn"/>
-  <img src="https://img.shields.io/badge/Status-Complete-2ecc71" alt="Status"/>
-</p>
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GIVEN-CHINYAMA/Employee-Attrition-Prediction-HR-Analytics/blob/main/Employee_Attrition_Prediction_HR_Analytics.ipynb)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://python.org)
+[![XGBoost](https://img.shields.io/badge/XGBoost-Gradient%20Boosting-FF6600?logo=xgboost)](https://xgboost.readthedocs.io)
+[![SHAP](https://img.shields.io/badge/SHAP-Explainable%20AI-8A2BE2)](https://shap.readthedocs.io)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
+[![Status](https://img.shields.io/badge/Status-Complete-2ecc71)](https://github.com/GIVEN-CHINYAMA/Employee-Attrition-Prediction-HR-Analytics)
 
-<p align="center">
-  <strong>An end-to-end machine learning pipeline that predicts employee resignation risk, identifies key attrition drivers using SHAP explainability, and quantifies financial exposure — enabling HR teams to intervene before it is too late.</strong>
-</p>
+**An end-to-end machine learning pipeline that predicts employee resignation risk, identifies key attrition drivers using SHAP explainability, and quantifies financial exposure — enabling HR teams to intervene before it is too late.**
 
 ---
 
-## 📌 Table of Contents        
+## 📌 Table of Contents
 
 - [Overview](#-overview)
 - [Business Problem](#-business-problem)
 - [Dataset](#-dataset)
-- [Project Structure](#-project-structure)
+- [Project Structure](#️-project-structure)
 - [Methodology](#-methodology)
 - [Models & Results](#-models--results)
 - [Key Findings](#-key-findings)
 - [HR Recommendations](#-actionable-hr-recommendations)
-- [Installation](#-installation)
+- [Installation](#️-installation)
 - [Usage](#-usage)
-- [Technologies](#-technologies)
+- [Technologies](#️-technologies)
 - [Author](#-author)
 
 ---
@@ -53,7 +47,7 @@ This project builds a **production-grade HR analytics pipeline** that:
 > *"Which employees are most likely to resign, and what organisational factors are driving attrition — so that HR can act before it is too late?"*
 
 | Objective | Deliverable |
-|---|---|
+|-----------|-------------|
 | Predict individual resignation risk | Probability score (0–100%) per employee |
 | Identify workforce attrition drivers | SHAP global & local feature importance |
 | Segment workforce by risk level | 4-tier risk classification system |
@@ -67,7 +61,7 @@ This project builds a **production-grade HR analytics pipeline** that:
 **IBM HR Analytics Employee Attrition Dataset**
 
 | Property | Value |
-|---|---|
+|----------|-------|
 | Source | IBM / Kaggle HR Analytics |
 | Employees | 1,470 |
 | Features | 35 (demographics, compensation, satisfaction, tenure) |
@@ -82,7 +76,7 @@ The dataset is loaded automatically in the notebook — no manual download is re
 ## 🗂️ Project Structure
 
 ```
-Employee-Attrition-Prediction/
+Employee-Attrition-Prediction-HR-Analytics/
 │
 ├── Employee_Attrition_Prediction_HR_Analytics.ipynb   ← Main notebook
 ├── README.md
@@ -107,9 +101,8 @@ Employee-Attrition-Prediction/
 
 ## 🔬 Methodology
 
-The project follows a rigorous, end-to-end machine learning workflow:
-
 ### 1. Exploratory Data Analysis
+
 - Attrition rate and class distribution
 - Numerical feature distributions by attrition status (Age, Income, Tenure)
 - Attrition rates across categorical features (Department, Job Role, Overtime, Travel)
@@ -117,10 +110,11 @@ The project follows a rigorous, end-to-end machine learning workflow:
 - Full feature correlation matrix
 
 ### 2. Feature Engineering
+
 Ten domain-specific HR features were engineered from raw data:
 
 | Feature | Description |
-|---|---|
+|---------|-------------|
 | `IncomePerYear` | Monthly income ÷ total working years — compensation relative to experience |
 | `PromotionLag` | Years since last promotion minus years in current role |
 | `LoyaltyScore` | Years at company ÷ number of companies worked — career mobility signal |
@@ -133,16 +127,18 @@ Ten domain-specific HR features were engineered from raw data:
 | `LowIncome` | Flag: income in bottom 25th percentile |
 
 ### 3. Preprocessing & Class Imbalance
+
 - Label encoding for categorical variables
 - `StandardScaler` for numerical normalisation
 - 70 / 15 / 15 stratified train / validation / test split
-- **SMOTE** (Synthetic Minority Over-sampling Technique) applied to the training set only — preventing data leakage into validation and test sets
+- **SMOTE** applied to the training set only — preventing data leakage into validation and test sets
 
 ### 4. Model Training
+
 Five algorithms trained and compared on the same data:
 
 | Model | Type |
-|---|---|
+|-------|------|
 | Logistic Regression | Interpretable linear baseline |
 | Decision Tree | Rule-based, explainable |
 | Random Forest | Ensemble bagging |
@@ -150,15 +146,18 @@ Five algorithms trained and compared on the same data:
 | **XGBoost** ⭐ | High-performance gradient boosting (primary model) |
 
 ### 5. Hyperparameter Tuning
+
 - `GridSearchCV` with `StratifiedKFold` (k=5) on XGBoost
 - Optimised for AUC-ROC to balance precision and recall
 - Parameters tuned: `n_estimators`, `max_depth`, `learning_rate`, `subsample`, `colsample_bytree`
 
 ### 6. Explainability (SHAP)
+
 - Global SHAP beeswarm and bar plots — top 15 attrition drivers across the workforce
 - Individual waterfall plot — explains each specific employee's risk score to HR managers
 
 ### 7. Risk Scoring & Financial Analysis
+
 - All 1,470 employees scored with attrition probability
 - Four-tier risk classification applied
 - Replacement cost model: predicted probability × annual salary × 150% industry-standard replacement factor
@@ -170,7 +169,7 @@ Five algorithms trained and compared on the same data:
 ### Validation Set Performance
 
 | Model | AUC-ROC | F1-Score | Recall | Precision |
-|---|---|---|---|---|
+|-------|---------|----------|--------|-----------|
 | **XGBoost (Tuned)** ⭐ | **~0.86** | **~0.72** | **~0.78** | **~0.67** |
 | Random Forest | ~0.84 | ~0.68 | ~0.72 | ~0.65 |
 | Gradient Boosting | ~0.83 | ~0.67 | ~0.71 | ~0.64 |
@@ -182,7 +181,7 @@ Five algorithms trained and compared on the same data:
 ### Risk Tier Distribution
 
 | Tier | Threshold | Employees |
-|---|---|---|
+|------|-----------|-----------|
 | 🔴 Critical Risk | ≥ 70% probability | ~5–8% of workforce |
 | 🟠 High Risk | 50–69% probability | ~8–12% of workforce |
 | 🟡 Medium Risk | 30–49% probability | ~15–20% of workforce |
@@ -195,7 +194,7 @@ Five algorithms trained and compared on the same data:
 Based on SHAP analysis, the top drivers of employee attrition are:
 
 | Rank | Driver | Direction | Insight |
-|---|---|---|---|
+|------|--------|-----------|---------|
 | 1 | **OverTime** | ↑ Risk | The single strongest predictor — employees working overtime are significantly more likely to resign |
 | 2 | **MonthlyIncome** | ↓ Risk | Higher compensation strongly reduces attrition |
 | 3 | **OverallSatisfaction** | ↓ Risk | Low satisfaction across job, environment, and work-life balance is a strong early warning signal |
@@ -231,11 +230,9 @@ Based on SHAP analysis, the top drivers of employee attrition are:
 
 ### Run in Google Colab (Recommended — No Setup Required)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GIVEN-CHINYAMA/Employee-Attrition-Prediction/blob/main/Employee_Attrition_Prediction_HR_Analytics.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GIVEN-CHINYAMA/Employee-Attrition-Prediction-HR-Analytics/blob/main/Employee_Attrition_Prediction_HR_Analytics.ipynb)
 
 Click the badge above to open the notebook directly in Google Colab. All dependencies are installed automatically in the first cell.
-
----
 
 ### Run Locally
 
@@ -243,8 +240,8 @@ Click the badge above to open the notebook directly in Google Colab. All depende
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/GIVEN-CHINYAMA/Employee-Attrition-Prediction.git
-cd Employee-Attrition-Prediction
+git clone https://github.com/GIVEN-CHINYAMA/Employee-Attrition-Prediction-HR-Analytics.git
+cd Employee-Attrition-Prediction-HR-Analytics
 
 # 2. (Optional) Create a virtual environment
 python -m venv venv
@@ -276,7 +273,7 @@ jupyter notebook Employee_Attrition_Prediction_HR_Analytics.ipynb
 ## 🛠️ Technologies
 
 | Category | Library | Version |
-|---|---|---|
+|----------|---------|---------|
 | Data Manipulation | `pandas`, `numpy` | Latest |
 | Machine Learning | `scikit-learn` | ≥ 1.3 |
 | Gradient Boosting | `xgboost` | ≥ 2.0 |
@@ -303,11 +300,12 @@ jupyter notebook Employee_Attrition_Prediction_HR_Analytics.ipynb
 
 ## 👤 Author
 
-**Given Chinyama**  
+**Given Chinyama**
 Data Scientist · Kwame Nkrumah University · Lusaka, Zambia
 
-[![GitHub](https://img.shields.io/badge/GitHub-GIVEN--CHINYAMA-181717?logo=github)](https://github.com/GIVEN-CHINYAMA)
-[![Email](https://img.shields.io/badge/Email-givenchinyama%40gmail.com-D14836?logo=gmail&logoColor=white)](mailto:givenchinyama@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-GIVEN--CHINYAMA-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/GIVEN-CHINYAMA)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-given--chinyama--data-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/given-chinyama-data)
+[![Email](https://img.shields.io/badge/Email-givenchinyama%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:givenchinyama@gmail.com)
 
 ---
 
@@ -317,6 +315,5 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-<p align="center">
-  <i>Built with ❤️ for HR professionals, data scientists, and people analytics practitioners.</i>
-</p>
+*Built with ❤️ for HR professionals, data scientists, and people analytics practitioners.*
+
